@@ -1,0 +1,18 @@
+services:
+  exercise-service:
+    build: .
+    ports:
+      - "8002:8002"
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres-exercises:5432/exercises_db
+      NATS_URL: nats://nats:4222
+    volumes:
+      - ./src:/app/src
+    command: python -m uvicorn src.main:app --host 0.0.0.0 --port 8002 --reload
+    networks:
+      - codesnap-net
+
+networks:
+  codesnap-net:
+    external: true
+    name: shared-codesnap-network
