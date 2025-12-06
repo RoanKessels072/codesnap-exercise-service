@@ -9,7 +9,7 @@ def seed_exercises():
     try:
         existing = db.query(Exercise).first()
         if existing:
-            print("✓ Exercises already exist. Skipping seed.")
+            print("Exercises already exist. Skipping seed.")
             return
         exercises_data = [
             Exercise(
@@ -183,10 +183,10 @@ def seed_exercises():
             db.add(exercise)
         
         db.commit()
-        print(f"✓ Added {len(exercises_data)} exercises successfully!")
+        print(f"Added {len(exercises_data)} exercises successfully!")
         
     except Exception as e:
-        print(f"✕ Error adding exercises: {e}")
+        print(f"Error adding exercises: {e}")
         db.rollback()
     finally:
         db.close()

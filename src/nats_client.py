@@ -1,6 +1,6 @@
 import nats
 import json
-from config import settings
+from src.config import settings
 
 class NATSClient:
     def __init__(self):
@@ -8,7 +8,7 @@ class NATSClient:
         
     async def connect(self):
         self.nc = await nats.connect(settings.NATS_URL)
-        print(f"✓ Connected to NATS at {settings.NATS_URL}")
+        print(f"Connected to NATS at {settings.NATS_URL}")
         
     async def close(self):
         if self.nc:

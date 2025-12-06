@@ -4,4 +4,6 @@ sqlalchemy
 psycopg[binary]
 nats-py
 pydantic
+pydantic-settings
 python-dotenv
+prometheus-client
