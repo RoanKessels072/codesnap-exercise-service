@@ -7,8 +7,8 @@ class NATSClient:
         self.nc = None
         
     async def connect(self):
-        self.nc = await nats.connect(settings.NATS_URL)
-        print(f"Connected to NATS at {settings.NATS_URL}")
+        self.nc = await nats.connect(settings.nats_url)
+        print(f"Connected to NATS at {settings.nats_url}")
         
     async def close(self):
         if self.nc:
