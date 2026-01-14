@@ -8,8 +8,25 @@ services:
     command: python -m uvicorn src.main:app --host 0.0.0.0 --port 8002 --reload
     networks:
       - codesnap-net
+      - default
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-exercise-service
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: codesnap
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - default
 
 networks:
   codesnap-net:
     external: true
     name: shared-codesnap-network
+
+volumes:
+  postgres_data:

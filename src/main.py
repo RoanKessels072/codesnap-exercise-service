@@ -4,7 +4,8 @@ from src.database import init_db
 from src import handlers
 from src.nats_client import nats_client
 from src.seed_data import seed_exercises 
-from prometheus_client import make_asgi_app
+from src.seed_data import seed_exercises 
+from prometheus_fastapi_instrumentator import Instrumentator
 import uvicorn
 
 @asynccontextmanager
@@ -35,6 +36,7 @@ async def lifespan(app: FastAPI):
     await nats_client.close()
 
 app = FastAPI(title="Exercise Service", lifespan=lifespan)
+Instrumentator().instrument(app).expose(app)
 
 @app.get("/health")
 async def health():
@@ -42,9 +44,6 @@ async def health():
         "status": "healthy",
         "service": "exercise-service"
     }
-
-metrics_app = make_asgi_app()
-app.mount("/metrics", metrics_app)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8002)

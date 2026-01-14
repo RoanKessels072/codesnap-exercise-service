@@ -7,3 +7,4 @@ pydantic
 pydantic-settings
 python-dotenv
 prometheus-client
+prometheus-fastapi-instrumentator
