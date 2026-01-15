@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+
 from src.database import init_db
 from src import handlers
 from src.nats_client import nats_client
@@ -36,6 +37,7 @@ async def lifespan(app: FastAPI):
     await nats_client.close()
 
 app = FastAPI(title="Exercise Service", lifespan=lifespan)
+
 Instrumentator().instrument(app).expose(app)
 
 @app.get("/health")
