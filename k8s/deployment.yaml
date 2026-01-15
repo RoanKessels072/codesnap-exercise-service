@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-service
+  labels:
+    app: exercise-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exercise-service
+  template:
+    metadata:
+      labels:
+        app: exercise-service
+    spec:
+      containers:
+        - name: exercise-service
+          image: roankessels072/codesnap-exercise-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8002
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://postgres:postgres@postgres-exercise-service:5432/codesnap"
+            - name: NATS_URL
+              value: "nats://nats:4222"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

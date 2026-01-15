@@ -7,4 +7,5 @@ pydantic
 pydantic-settings
 python-dotenv
 prometheus-client
+psycopg2-binary
 prometheus-fastapi-instrumentator
