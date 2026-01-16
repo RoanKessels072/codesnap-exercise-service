@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+import logfire
 
 from src.database import init_db
 from src import handlers
@@ -8,6 +9,8 @@ from src.seed_data import seed_exercises
 from src.seed_data import seed_exercises 
 from prometheus_fastapi_instrumentator import Instrumentator
 import uvicorn
+
+logfire.configure()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -37,6 +40,7 @@ async def lifespan(app: FastAPI):
     await nats_client.close()
 
 app = FastAPI(title="Exercise Service", lifespan=lifespan)
+logfire.instrument_fastapi(app)
 
 Instrumentator().instrument(app).expose(app)
 

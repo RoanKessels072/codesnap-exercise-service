@@ -10,3 +10,4 @@ prometheus-client
 psycopg2-binary
 prometheus-fastapi-instrumentator
 
+logfire[fastapi]
