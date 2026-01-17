@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: exercise-service
-          image: roankessels/codesnap-exercise-service:latest
+          image: roankessels/codesnap-exercise-service:d96b164d55274429a1cea38eb21f1d8d46531501
           imagePullPolicy: Always
           ports:
             - containerPort: 8002
