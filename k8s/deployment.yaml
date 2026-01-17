@@ -14,11 +14,9 @@ spec:
       labels:
         app: exercise-service
     spec:
-      imagePullSecrets:
-        - name: ecr-secret
       containers:
         - name: exercise-service
-          image: 239861161036.dkr.ecr.eu-central-1.amazonaws.com/codesnap/exercise-service:v1
+          image: roankessels/codesnap-exercise-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8002
